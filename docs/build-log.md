@@ -1,0 +1,29 @@
+# Build log
+
+## 2026-10-17 — Taking stock
+
+We gathered what we already have: a Raspberry Pi Pico (headers already soldered) and the SunFounder Thales electronics kit.
+
+![Raspberry Pi Pico](images/2026-10-17-pico.jpg)
+
+![Thales kit packing list](images/2026-10-17-thales-kit-parts.jpg)
+
+## 2026-10-18 — First drive and choosing parts
+
+The DAGU Wild Thumper 6WD chassis is assembled. Each of the six wheels has its own motor; the three motors on each side are wired together on a terminal strip in the middle. We connected the 2S LiPo battery directly and the rover started moving nicely!
+
+![Chassis with motors wired to the terminal strip](images/2026-10-18-chassis-wired.jpg)
+
+Things we noticed:
+- Some wires loop loosely over the battery trays and chassis joints — they need tidying so they can't get pinched.
+- One left-side wire looks pinker than the others; worth checking it's connected to the right motor terminal.
+- We should check that all three wheels on each side spin the same way.
+
+Then we picked and ordered the parts for Phase 1 (see the [bill of materials](bom.md)):
+- **Cytron MDD20A** motor driver — because three stuck motors on one side can pull ~20 A.
+- **20 A fuse**, **XT60 connector** and **Pololu power switch** — so the LiPo can't hurt anything.
+- **LiPo alarm** — so we never run the battery flat.
+
+![Our LiPo battery](images/2026-10-18-lipo-battery.jpg)
+
+Next: wait for parts, plan the wiring ([wiring](wiring.md)), and start writing the Pico code.

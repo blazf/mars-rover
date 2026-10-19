@@ -1,0 +1,14 @@
+Id	Description	Qty	Unit	Designators
+1	Cable, 2 x 16 AWG	0	m	W_LEFT, W_RIGHT
+2	Cable, Dupont jumper wires, 5 x 0.14 mm²	0	m	W_CTRL
+3	Connector, Cytron MDD20A, dual 20 A motor driver, 11 pins	1		MDD20A
+4	Connector, Inline ATO/ATC blade fuse, 20 A (yellow), 12 AWG holder, 2 pins	1		FUSE
+5	Connector, Left side motors, 3 x Wild Thumper gearmotor in parallel, 2 pins	1		LEFT
+6	Connector, LiPo 2S 7.4 V 2000 mAh 25C, XT60 female (on battery), 2 pins	1		BATTERY
+7	Connector, Pololu, 16 A, reverse-voltage protected, 3 pins	1		SWITCH
+8	Connector, Raspberry Pi Pico, powered from Mac USB in Phase 1, 5 pins	1		PICO
+9	Connector, Right side motors, 3 x Wild Thumper gearmotor in parallel, 2 pins	1		RIGHT
+10	Connector, XT60, male (rover side), 2 pins	1		XT60
+11	Wire, 16 AWG, BK	0	m	W_BATT_NEG
+12	Wire, 16 AWG, RD	0	m	W_BATT_POS, W_FUSE_SW, W_SW_DRV
+13	Wire, 22 AWG, BK	0	m	W_SW_GND

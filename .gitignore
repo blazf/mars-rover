@@ -1,0 +1,17 @@
+# Original iPhone photos (converted copies live in docs/images/)
+*.HEIC
+*.heic
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Xcode
+xcuserdata/
+DerivedData/
+*.xcuserstate

@@ -1,0 +1,136 @@
+# Mars rover – Phase 1 wiring (power + motors + Pico control)
+#
+# Render:  wireviz hardware/wiring/rover.yml
+# Output:  rover.svg / rover.png / rover.html / rover.bom.tsv next to this file
+#
+# Terminal names on the MDD20A follow the board silkscreen as best we know –
+# double-check against the real board before connecting power.
+
+metadata:
+  title: Mars rover – Phase 1 wiring
+
+options:
+  fontname: arial
+  bgcolor: WH
+
+connectors:
+  BATTERY:
+    type: LiPo 2S 7.4 V 2000 mAh 25C
+    subtype: XT60 female (on battery)
+    pinlabels: [+, "-"]
+    notes: Lectron Pro 2S. Balance lead goes to the LiPo alarm only.
+
+  XT60:
+    type: XT60
+    subtype: male (rover side)
+    pinlabels: [+, "-"]
+    notes: Unplug = OFF until the power switch is installed.
+
+  FUSE:
+    type: Inline ATO/ATC blade fuse
+    subtype: 20 A (yellow), 12 AWG holder
+    pinlabels: [IN, OUT]
+
+  SWITCH:
+    type: Pololu #2813 Big Pushbutton Power Switch HP
+    subtype: 16 A, reverse-voltage protected
+    pinlabels: [VIN, GND, VOUT]
+    notes: Not installed yet – bridge VIN to VOUT with wire until it arrives.
+
+  MDD20A:
+    type: Cytron MDD20A
+    subtype: dual 20 A motor driver
+    pinlabels: [B+, B-, M1A, M1B, M2A, M2B, PWM1, DIR1, PWM2, DIR2, GND]
+
+  LEFT:
+    type: Left side motors
+    subtype: 3 x Wild Thumper gearmotor in parallel
+    pinlabels: [+, "-"]
+
+  RIGHT:
+    type: Right side motors
+    subtype: 3 x Wild Thumper gearmotor in parallel
+    pinlabels: [+, "-"]
+
+  PICO:
+    type: Raspberry Pi Pico
+    subtype: powered from Mac USB in Phase 1
+    pins: [4, 5, 9, 10, 8]
+    pinlabels: [GP2, GP3, GP6, GP7, GND]
+
+cables:
+  W_BATT_POS:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [RD]
+    category: bundle
+  W_FUSE_SW:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [RD]
+    category: bundle
+  W_SW_DRV:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [RD]
+    category: bundle
+  W_BATT_NEG:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [BK]
+    category: bundle
+  W_SW_GND:
+    wirecount: 1
+    gauge: 22 AWG
+    colors: [BK]
+    category: bundle
+  W_LEFT:
+    wirecount: 2
+    gauge: 16 AWG
+    colors: [RD, BK]
+  W_RIGHT:
+    wirecount: 2
+    gauge: 16 AWG
+    colors: [RD, BK]
+  W_CTRL:
+    wirecount: 5
+    gauge: 0.14 mm2
+    type: Dupont jumper wires
+    colors: [YE, OG, GN, BU, BK]
+    notes: Shared ground between Pico and MDD20A is essential.
+
+connections:
+  # Battery + -> fuse -> switch -> driver
+  - - BATTERY
+    - ==>
+    - XT60
+  - - XT60: [1]
+    - W_BATT_POS: [1]
+    - FUSE: [1]
+  - - FUSE: [2]
+    - W_FUSE_SW: [1]
+    - SWITCH: [1]
+  - - SWITCH: [3]
+    - W_SW_DRV: [1]
+    - MDD20A: [1]
+
+  # Battery - -> driver, plus thin ground for the switch electronics
+  - - XT60: [2]
+    - W_BATT_NEG: [1]
+    - MDD20A: [2]
+  - - XT60: [2]
+    - W_SW_GND: [1]
+    - SWITCH: [2]
+
+  # Motors
+  - - MDD20A: [3, 4]
+    - W_LEFT: [1, 2]
+    - LEFT: [1, 2]
+  - - MDD20A: [5, 6]
+    - W_RIGHT: [1, 2]
+    - RIGHT: [1, 2]
+
+  # Pico control signals
+  - - PICO: [4, 5, 9, 10, 8]
+    - W_CTRL: [1, 2, 3, 4, 5]
+    - MDD20A: [7, 8, 9, 10, 11]
