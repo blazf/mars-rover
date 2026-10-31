@@ -27,3 +27,13 @@ Then we picked and ordered the parts for Phase 1 (see the [bill of materials](bo
 ![Our LiPo battery](images/2026-10-18-lipo-battery.jpg)
 
 Next: wait for parts, plan the wiring ([wiring](wiring.md)), and start writing the Pico code.
+
+## 2026-10-31 — Parts arrived
+
+Everything is here except the power switch (still backordered), so the XT60 plug is our on/off switch for now.
+
+The MDD20A motor driver has handy extras: **test buttons** to spin each motor without any code, error/over-current LEDs, and the truth table printed right on the back. Its control inputs are a green screw terminal rather than pins. We updated the [wiring diagrams](wiring.md) with the exact labels from the board.
+
+![MDD20A motor driver](images/2026-10-31-mdd20a-top.jpg)
+
+Next: wire it up following the [wiring order](wiring.md#wiring-order), test each side with the buttons, then write the first Pico program.

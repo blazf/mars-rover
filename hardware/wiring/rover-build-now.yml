@@ -33,8 +33,8 @@ connectors:
   MDD20A:
     type: Cytron MDD20A
     subtype: motor driver
-    pinlabels: [POWER +, POWER -, M1A, M1B, M2A, M2B, PWM1, DIR1, PWM2, DIR2, GND]
-    notes: Check these names against the labels on the board.
+    pinlabels: [POWER +, POWER -, M1A, M1B, M2A, M2B, GND, GND, PWM2, DIR2, PWM1, DIR1]
+    notes: Labels as printed on the board. POWER has NO reverse polarity protection.
 
   LEFT:
     type: Left motors (3)
@@ -79,7 +79,7 @@ cables:
     colors: [RD, BK]
   Control wires:
     wirecount: 5
-    type: jumper wires
+    type: jumper wires, bare ends into green screw terminal
     colors: [YE, OG, GN, BU, BK]
     notes: Black = shared ground, essential!
 
@@ -104,4 +104,4 @@ connections:
     - RIGHT: [1, 2]
   - - PICO: [4, 5, 9, 10, 8]
     - Control wires: [1, 2, 3, 4, 5]
-    - MDD20A: [7, 8, 9, 10, 11]
+    - MDD20A: [11, 12, 9, 10, 7]

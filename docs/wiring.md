@@ -12,10 +12,10 @@ Source: [`hardware/wiring/rover-build-now.yml`](../hardware/wiring/rover-build-n
 2. **Motors → driver:** left terminal strip → M1A/M1B, right terminal strip → M2A/M2B (16 AWG).
 3. **Black power wire:** XT60 − → driver POWER −.
 4. **Red power wires:** XT60 + → fuse holder → driver POWER +. Fuse **out** of the holder for now.
-5. **Control wires:** Pico GP2, GP3, GP6, GP7, GND → driver PWM1, DIR1, PWM2, DIR2, GND.
+5. **Control wires:** Pico GP2, GP3, GP6, GP7, GND → driver PWM1, DIR1, PWM2, DIR2, GND. The driver's control inputs are a **green screw terminal**, not pins: strip the wire ends (or cut a jumper wire and strip it) and screw them in.
 6. **Check:** red goes only to "+", black only to "−", no bare wire touching the metal chassis.
 7. **Lift the wheels off the table**, put the 20 A fuse in, plug in the battery.
-8. Use the driver's **test buttons** (labelled M1A/M1B/M2A/M2B on the board, if present) to spin each side. If a side spins backwards, swap that side's two motor wires.
+8. Press the driver's **test buttons** (M1A, M1B, M2A, M2B, bottom-left of the board) to spin each side. If a side spins backwards, swap that side's two motor wires.
 
 ## Final Phase 1 wiring (with power switch)
 
@@ -23,13 +23,36 @@ Source: [`hardware/wiring/rover-build-now.yml`](../hardware/wiring/rover-build-n
 
 Source: [`hardware/wiring/rover.yml`](../hardware/wiring/rover.yml) (WireViz). Edit the YAML and re-run `wireviz hardware/wiring/rover.yml` to update the picture.
 
-> ⚠️ The MDD20A terminal names are from its documentation; check them against the labels printed on the real board before connecting the battery.
+## The MDD20A board
+
+![MDD20A top side and quick start guide](images/2026-10-31-mdd20a-top.jpg)
+
+| Where on the board | Terminals (left → right, as in the photo above) |
+|---|---|
+| Big black screw terminal (top) | **MOTOR 2** (M2B, M2A) · **POWER** (−, +) · **MOTOR 1** (M1B, M1A) |
+| Green screw terminal (bottom right) | GND · GND · PWM2 · DIR2 · PWM1 · DIR1 |
+| Buttons (bottom left) | M1A, M1B, M2A, M2B: spin a motor without any code |
+| LEDs | PWR, ERR1/ERR2 (error), OC1/OC2 (over-current) |
+
+> ⚠️ The board says **"NO POLARITY PROTECTION"** next to POWER. Read the **+** and **−** marks printed by the POWER screws before connecting, and double-check red goes to **+**. Per the quick start card, + is the POWER screw next to MOTOR 1.
+
+### Truth table (printed on the back)
+
+![MDD20A back side with truth table](images/2026-10-31-mdd20a-bottom-truth-table.jpg)
+
+| PWM | DIR | Output A | Output B | Motor |
+|---|---|---|---|---|
+| Low | any | Low | Low | **Brake** |
+| High | Low | High | Low | Forward |
+| High | High | Low | High | Backward |
+
+So in code: DIR picks the direction, PWM duty cycle (0–100 %) sets the speed, and PWM 0 brakes.
 
 ## Power path
 
 ```
-LiPo ─ XT60 ─ 20 A fuse ─ power switch ─ MDD20A B+
-LiPo − ──────────────────────────────── MDD20A B−
+LiPo ─ XT60 ─ 20 A fuse ─ power switch ─ MDD20A POWER +
+LiPo − ──────────────────────────────── MDD20A POWER −
 ```
 
 - Until the Pololu switch arrives, there is a plain wire where the switch goes and **the XT60 plug is the on/off switch**.

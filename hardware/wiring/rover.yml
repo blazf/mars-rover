@@ -3,8 +3,7 @@
 # Render:  wireviz hardware/wiring/rover.yml
 # Output:  rover.svg / rover.png / rover.html / rover.bom.tsv next to this file
 #
-# Terminal names on the MDD20A follow the board silkscreen as best we know –
-# double-check against the real board before connecting power.
+# MDD20A terminal names verified against the real board (2026-10-31).
 
 metadata:
   title: Mars rover – Phase 1 wiring
@@ -40,7 +39,8 @@ connectors:
   MDD20A:
     type: Cytron MDD20A
     subtype: dual 20 A motor driver
-    pinlabels: [B+, B-, M1A, M1B, M2A, M2B, PWM1, DIR1, PWM2, DIR2, GND]
+    pinlabels: [POWER +, POWER -, M1A, M1B, M2A, M2B, GND, GND, PWM2, DIR2, PWM1, DIR1]
+    notes: Labels as printed on the board. POWER has NO reverse polarity protection.
 
   LEFT:
     type: Left side motors
@@ -95,7 +95,7 @@ cables:
   W_CTRL:
     wirecount: 5
     gauge: 0.14 mm2
-    type: Dupont jumper wires
+    type: jumper wires, bare ends into green screw terminal
     colors: [YE, OG, GN, BU, BK]
     notes: Shared ground between Pico and MDD20A is essential.
 
@@ -133,4 +133,4 @@ connections:
   # Pico control signals
   - - PICO: [4, 5, 9, 10, 8]
     - W_CTRL: [1, 2, 3, 4, 5]
-    - MDD20A: [7, 8, 9, 10, 11]
+    - MDD20A: [11, 12, 9, 10, 7]

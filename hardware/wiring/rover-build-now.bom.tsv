@@ -1,8 +1,8 @@
 Id	Description	Qty	Unit	Designators
 1	Cable, 2 x 16 AWG	0	m	Left motor wires, Right motor wires
-2	Cable, jumper wires, 5 wires	0	m	Control wires
+2	Cable, jumper wires, bare ends into green screw terminal, 5 wires	0	m	Control wires
 3	Connector, Blade fuse holder, 20 A fuse (yellow), 2 pins	1		FUSE
-4	Connector, Cytron MDD20A, motor driver, 11 pins	1		MDD20A
+4	Connector, Cytron MDD20A, motor driver, 12 pins	1		MDD20A
 5	Connector, Left motors (3), terminal strip, 2 pins	1		LEFT
 6	Connector, LiPo 2S 7.4 V 2000 mAh, XT60 female, 2 pins	1		BATTERY
 7	Connector, Raspberry Pi Pico, USB cable to Mac, 5 pins	1		PICO
