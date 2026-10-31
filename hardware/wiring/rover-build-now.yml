@@ -1,0 +1,107 @@
+# Mars rover – Phase 1 wiring, BUILD NOW version (power switch not installed yet)
+#
+# Same as rover.yml, but without the Pololu power switch: the fuse goes straight
+# to the motor driver and unplugging the XT60 is the on/off switch.
+#
+# Render:  wireviz hardware/wiring/rover-build-now.yml
+
+metadata:
+  title: Mars rover – Phase 1 wiring (build now, no switch)
+
+options:
+  fontname: arial
+  bgcolor: WH
+
+connectors:
+  BATTERY:
+    type: LiPo 2S 7.4 V 2000 mAh
+    subtype: XT60 female
+    pinlabels: [+, "-"]
+    notes: Plug in LAST, unplug FIRST.
+
+  XT60:
+    type: XT60 male
+    subtype: rover side
+    pinlabels: [+, "-"]
+    notes: Unplug = OFF
+
+  FUSE:
+    type: Blade fuse holder
+    subtype: 20 A fuse (yellow)
+    pinlabels: [IN, OUT]
+
+  MDD20A:
+    type: Cytron MDD20A
+    subtype: motor driver
+    pinlabels: [POWER +, POWER -, M1A, M1B, M2A, M2B, PWM1, DIR1, PWM2, DIR2, GND]
+    notes: Check these names against the labels on the board.
+
+  LEFT:
+    type: Left motors (3)
+    subtype: terminal strip
+    pinlabels: [+, "-"]
+
+  RIGHT:
+    type: Right motors (3)
+    subtype: terminal strip
+    pinlabels: [+, "-"]
+
+  PICO:
+    type: Raspberry Pi Pico
+    subtype: USB cable to Mac
+    pins: [4, 5, 9, 10, 8]
+    pinlabels: [GP2, GP3, GP6, GP7, GND]
+    notes: Powered by USB only – no battery wire to the Pico.
+
+cables:
+  Red power wire 1:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [RD]
+    category: bundle
+  Red power wire 2:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [RD]
+    category: bundle
+  Black power wire:
+    wirecount: 1
+    gauge: 16 AWG
+    colors: [BK]
+    category: bundle
+  Left motor wires:
+    wirecount: 2
+    gauge: 16 AWG
+    colors: [RD, BK]
+  Right motor wires:
+    wirecount: 2
+    gauge: 16 AWG
+    colors: [RD, BK]
+  Control wires:
+    wirecount: 5
+    type: jumper wires
+    colors: [YE, OG, GN, BU, BK]
+    notes: Black = shared ground, essential!
+
+connections:
+  - - BATTERY
+    - ==>
+    - XT60
+  - - XT60: [1]
+    - Red power wire 1: [1]
+    - FUSE: [1]
+  - - FUSE: [2]
+    - Red power wire 2: [1]
+    - MDD20A: [1]
+  - - XT60: [2]
+    - Black power wire: [1]
+    - MDD20A: [2]
+  - - MDD20A: [3, 4]
+    - Left motor wires: [1, 2]
+    - LEFT: [1, 2]
+  - - MDD20A: [5, 6]
+    - Right motor wires: [1, 2]
+    - RIGHT: [1, 2]
+  - - PICO: [4, 5, 9, 10, 8]
+    - Control wires: [1, 2, 3, 4, 5]
+    - MDD20A: [7, 8, 9, 10, 11]

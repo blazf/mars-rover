@@ -1,6 +1,23 @@
 # Wiring
 
-## Phase 1 wiring diagram
+## Build now (power switch not here yet)
+
+![Phase 1 wiring, no switch](../hardware/wiring/rover-build-now.svg)
+
+Source: [`hardware/wiring/rover-build-now.yml`](../hardware/wiring/rover-build-now.yml). The XT60 plug is the on/off switch until the power switch arrives.
+
+### Wiring order
+
+1. **Battery unplugged** the whole time.
+2. **Motors → driver:** left terminal strip → M1A/M1B, right terminal strip → M2A/M2B (16 AWG).
+3. **Black power wire:** XT60 − → driver POWER −.
+4. **Red power wires:** XT60 + → fuse holder → driver POWER +. Fuse **out** of the holder for now.
+5. **Control wires:** Pico GP2, GP3, GP6, GP7, GND → driver PWM1, DIR1, PWM2, DIR2, GND.
+6. **Check:** red goes only to "+", black only to "−", no bare wire touching the metal chassis.
+7. **Lift the wheels off the table**, put the 20 A fuse in, plug in the battery.
+8. Use the driver's **test buttons** to spin each side. If a side spins backwards, swap that side's two motor wires.
+
+## Final Phase 1 wiring (with power switch)
 
 ![Phase 1 wiring diagram](../hardware/wiring/rover.svg)
 
