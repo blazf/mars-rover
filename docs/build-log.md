@@ -37,3 +37,11 @@ The MDD20A motor driver has handy extras: **test buttons** to spin each motor wi
 ![MDD20A motor driver](images/2026-10-31-mdd20a-top.jpg)
 
 Next: wire it up following the [wiring order](wiring.md#wiring-order), test each side with the buttons, then write the first Pico program.
+
+## 2026-10-31 — Wired up and first code-driven spin
+
+We soldered the XT60 and wired everything following the wiring order. The test buttons showed M1A and M2A spinning opposite ways: the right-side motors are mirrored, so we swapped the right side's wires (M2A ↔ M2B). Now "A" is forward on both sides.
+
+The Pico got a safe-boot [`main.py`](../firmware/main.py) that holds the motors stopped at power-up. Then the [slow motor test](../firmware/motor_test.py) ran each side forward and back at 30 % from the Mac: all correct!
+
+Next: drive firmware (`D <left> <right>` commands with a stop-if-silent watchdog) and driving it from the Mac with the Xbox controller.
