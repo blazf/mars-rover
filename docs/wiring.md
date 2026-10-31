@@ -15,7 +15,7 @@ Source: [`hardware/wiring/rover-build-now.yml`](../hardware/wiring/rover-build-n
 5. **Control wires:** Pico GP2, GP3, GP6, GP7, GND → driver PWM1, DIR1, PWM2, DIR2, GND.
 6. **Check:** red goes only to "+", black only to "−", no bare wire touching the metal chassis.
 7. **Lift the wheels off the table**, put the 20 A fuse in, plug in the battery.
-8. Use the driver's **test buttons** to spin each side. If a side spins backwards, swap that side's two motor wires.
+8. Use the driver's **test buttons** (labelled M1A/M1B/M2A/M2B on the board, if present) to spin each side. If a side spins backwards, swap that side's two motor wires.
 
 ## Final Phase 1 wiring (with power switch)
 
