@@ -112,7 +112,7 @@ connections:
     - LEFT: [1, 2]
   - - MDD20A: [5, 6]
     - Right motor wires: [1, 2]
-    - RIGHT: [1, 2]
+    - RIGHT: [2, 1]
   - - PICO: [4, 5, 9, 10, 8]
     - Control wires: [1, 2, 3, 4, 5]
     - MDD20A: [11, 12, 9, 10, 7]

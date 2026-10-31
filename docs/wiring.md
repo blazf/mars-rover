@@ -75,9 +75,9 @@ The three motors on each side are already joined on the terminal strip in the mi
 | MDD20A terminal | Goes to |
 |---|---|
 | M1A / M1B | Left side motors (+ / −) |
-| M2A / M2B | Right side motors (+ / −) |
+| M2A / M2B | Right side motors (− / +): **crossed on purpose**, the right motors face the other way |
 
-If one side drives backwards, swap that side's two wires — or flip it in software.
+The right side is wired crossed because its motors are mirrored. Check: the test buttons M1A and M2A should both spin the wheels forward.
 
 ## Pico → MDD20A (control)
 
