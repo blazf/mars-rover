@@ -46,10 +46,12 @@ python mac/drive.py
 
 | Control | Does |
 |---|---|
-| Left stick up/down | Forward / backward (50 % max) |
-| Right stick left/right | Turn |
-| Hold **RB** | Turbo (100 %) |
+| Left stick up/down | Forward / backward |
+| Left stick left/right | Turn |
+| Hold **RB** | Turbo |
 | Hold **B** | Stop |
+
+Speed is capped at **20 %** for testing on the cable. Raise it with `--max`, e.g. `python mac/drive.py --max 50` (normal 50 %, turbo 100 % with `--max 100`).
 
 Ctrl-C quits. If the script stops or the cable comes out, the Pico stops the motors within 0.3 s.
 

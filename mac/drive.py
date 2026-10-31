@@ -2,10 +2,11 @@
 
     pip install -r mac/requirements.txt
     python mac/drive.py
+    python mac/drive.py --max 50    # raise the speed cap (default is DEFAULT_MAX)
 
 Controls:
     left stick up/down    forward / backward
-    right stick left/right  turn
+    left stick left/right turn
     hold RB               turbo (full speed)
     B                     stop (hold)
 
@@ -24,6 +25,7 @@ from pygame._sdl2 import controller
 
 NORMAL_SPEED = 50   # % at full stick
 TURBO_SPEED = 100
+DEFAULT_MAX = 20    # % cap while testing on the cable; raise with --max
 DEADZONE = 0.12
 SEND_HZ = 25
 
@@ -43,7 +45,7 @@ def axis(pad, which):
 
 
 def mix(throttle, turn, max_speed):
-    """Arcade drive: one stick for speed, one for turning."""
+    """Arcade drive: stick up/down is speed, left/right is turning."""
     left = throttle + turn
     right = throttle - turn
     biggest = max(1.0, abs(left), abs(right))
@@ -65,7 +67,12 @@ def wait_for_controller():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", default=None, help="serial port of the Pico")
+    parser.add_argument("--max", type=int, default=DEFAULT_MAX,
+                        help="speed cap in %% for everything, turbo included (e.g. --max 10 for testing)")
     args = parser.parse_args()
+    normal_speed = min(NORMAL_SPEED, args.max)
+    turbo_speed = min(TURBO_SPEED, args.max)
+    print(f"Speed: {normal_speed} %, turbo {turbo_speed} %")
 
     port = args.port or find_port()
     link = serial.Serial(port, 115200, timeout=0.5)
@@ -88,9 +95,9 @@ def main():
             if pad.get_button(pygame.CONTROLLER_BUTTON_B):
                 left, right = 0, 0
             else:
-                max_speed = TURBO_SPEED if pad.get_button(pygame.CONTROLLER_BUTTON_RIGHTSHOULDER) else NORMAL_SPEED
+                max_speed = turbo_speed if pad.get_button(pygame.CONTROLLER_BUTTON_RIGHTSHOULDER) else normal_speed
                 throttle = -axis(pad, pygame.CONTROLLER_AXIS_LEFTY)  # stick up = negative
-                turn = axis(pad, pygame.CONTROLLER_AXIS_RIGHTX)
+                turn = axis(pad, pygame.CONTROLLER_AXIS_LEFTX)
                 left, right = mix(throttle, turn, max_speed)
 
             link.write(f"D {left} {right}\n".encode())
