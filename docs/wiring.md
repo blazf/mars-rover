@@ -59,6 +59,15 @@ LiPo − ───────────────────────�
 - Use 16 AWG wire for everything that carries motor current.
 - Put the fuse as close to the battery connector as possible.
 
+## LiPo alarm
+
+The alarm plugs into the battery's **balance lead** (the small white 3-pin plug), not into the power wiring. It shows the voltage and beeps when a cell gets low.
+
+- The alarm has 9 pins, marked **−, 1S … 8S**. A 2S battery uses only the bottom three: **−, 1S, 2S**.
+- Plug the balance lead on so its **black wire is on the "−" pin** (the end marked with a minus).
+- Press the button to cycle the display and set the alarm. The factory setting is 3.3 V; set it to **3.5 V**.
+- Unplug it after driving: it slowly drains the battery.
+
 ## Motors
 
 The three motors on each side are already joined on the terminal strip in the middle of the chassis.

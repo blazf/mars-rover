@@ -19,6 +19,17 @@ connectors:
     pinlabels: [+, "-"]
     notes: Plug in LAST, unplug FIRST.
 
+  BALANCE:
+    type: Battery balance lead
+    subtype: white 3-pin plug (same battery)
+    pinlabels: ["- (black)", cell 1, "+ (red)"]
+
+  ALARM:
+    type: LiPo alarm (BX100 type)
+    subtype: set to 3.5 V per cell
+    pinlabels: ["-", 1S, 2S]
+    notes: Black wire on the "-" pin (the end marked with a minus). Unplug after driving, it slowly drains the battery.
+
   XT60:
     type: XT60 male
     subtype: rover side
@@ -105,3 +116,6 @@ connections:
   - - PICO: [4, 5, 9, 10, 8]
     - Control wires: [1, 2, 3, 4, 5]
     - MDD20A: [11, 12, 9, 10, 7]
+  - - BALANCE: [1, 2, 3]
+    - -->
+    - ALARM: [1, 2, 3]
