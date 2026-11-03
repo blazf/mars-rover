@@ -15,3 +15,6 @@ venv/
 xcuserdata/
 DerivedData/
 *.xcuserstate
+
+# Social media drafts (photos of the kids stay local)
+twitter/
